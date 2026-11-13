@@ -9,7 +9,6 @@
 declare(strict_types=1);
 
 use function Brain\Monkey\Filters\expectAdded;
-use Brain\Monkey\Filters;
 
 it('registers the capability filter and grants the Editor capability', function (): void {
     // The plugin registers its filter at file scope, so loading it inside the
