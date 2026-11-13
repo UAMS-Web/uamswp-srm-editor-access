@@ -2,7 +2,7 @@
     "name": "uams-web/uamswp-srm-editor-access",
     "description": "Allows users with the Editor role to access and manage redirects in the UAMSWP Safe Redirect Manager plugin.",
     "type": "wordpress-plugin",
-    "license": "proprietary",
+    "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=8.2"
     },
