@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 add_filter( 'uamswp_srm_restrict_to_capability', 'uamswp_srm_allow_editor_access' );
 
-function uamswp_srm_allow_editor_access( $capability ) {
+function uamswp_srm_allow_editor_access( $capability ): string {
     // Return a capability that Editors possess
     return 'edit_pages'; 
 }
