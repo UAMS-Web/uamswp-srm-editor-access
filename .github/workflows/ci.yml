@@ -1,0 +1,64 @@
+name: CI
+
+# Calls the shared job chain in UAMS-Web/uams-ci-workflows. The `uses:` reference names a release
+# tag, never a branch, so a change to the shared chain reaches this repository only when the tag
+# here moves. This repository is public, so the chain runs on every pull request with no
+# RUN_REMOTE_CI gate.
+#
+# The last job, `CI`, is the one check a ruleset requires from this workflow. It needs the call,
+# runs always, and fails unless the call reports `success`. Do not rename `CI`, and do not rename
+# the `checks` job without changing `needs:` below.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # Lets the workflow be run on demand against a branch.
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  # The shared chain. Its checks report as `checks / <job name> (<operating system>)`.
+  checks:
+    uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.10.1
+    with:
+      linux-only: true
+      mutate: false
+      floor-lint: true
+      floor-lint-php: '8.2'
+      # The plugin is one file, so the floor lint parses it directly.
+      floor-lint-command: php -l uamswp-srm-editor-access.php
+      download-archive: true
+      download-archive-command: node .claude/skills/download-archive-check/check-download-archive.mjs
+      # The suite is the Unit process only, so `composer test` (which needs a JUnit report and a
+      # skip baseline) is not used.
+      pest-command: composer test:unit
+
+  # The one check a ruleset requires from this workflow. Keep `needs:` naming the call.
+  ci:
+    name: CI
+    needs: [checks]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # `skipped` and `cancelled` fail as well as `failure`: a call that did not run proved nothing.
+      - name: Every needed job succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Needed job results: $RESULTS"
+          # An empty list would run no iterations and pass having read nothing.
+          if [ -z "$RESULTS" ]; then echo "::error::No needed job results to read"; exit 1; fi
+          for result in $RESULTS; do
+            if [ "$result" != "success" ]; then
+              echo "::error::A needed job reported $result"
+              exit 1
+            fi
+          done
