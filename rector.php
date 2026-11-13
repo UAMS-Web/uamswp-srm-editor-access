@@ -115,7 +115,7 @@ return RectorConfig::configure()
         // WordPress repositories whose Integration suite has its own Composer
         // setup (the tests skill): its vendor/ sits inside tests/, and Rector
         // would otherwise rewrite PHPUnit 9 and its dependencies. Uncomment.
-        // __DIR__.'/tests/Integration/vendor',
+        __DIR__.'/tests/Integration/vendor',
         ...$neverRules,
         ...($isSweepProfile ? [] : $sweepOnlyRules),
     ])
@@ -127,8 +127,8 @@ return RectorConfig::configure()
         privatization: true,
         earlyReturn: true,
     )
-    // The lowest PHP version the plugin supports (8.2); the floor itself is
-    // declared in UAMS-Web/uamswp-srm-editor-access#5.
+    // The lowest PHP version the plugin supports (8.2), the floor declared in
+    // composer.json's `require.php` and the plugin header's `Requires PHP`.
     ->withPhpVersion(PhpVersion::PHP_82)
     // Every PHP upgrade set up to the floor, and no further. With no argument
     // this reads the floor from composer.json's `require.php` (then
@@ -137,7 +137,7 @@ return RectorConfig::configure()
     // composer.json to determine your PHP version" (Rector 2.6.7,
     // RectorConfigBuilder::withPhpSets()). So composer.json carries
     // `"require": {"php": ">=<floor>"}`, the same floor as the line above.
-    ->withPhpSets(php82: true)
+    ->withPhpSets()
     // Laravel and Statamic repositories: uncomment the call below after
     // `composer require --dev driftingly/rector-laravel`.
     //
