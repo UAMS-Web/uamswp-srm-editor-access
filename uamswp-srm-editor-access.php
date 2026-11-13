@@ -14,7 +14,7 @@ declare(strict_types=1);
  * Copyright: 2026 UAMS Web Services
  */
 
-// Exit if accessed directly
+// Exit if accessed directly (scratch change)
 if (! defined('ABSPATH')) {
     exit;
 }
