@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Plugin Name: UAMSWP Safe Redirect Manager - Editor Access
  * Plugin URI: https://github.com/UAMS-Web/uamswp-srm-editor-access
@@ -9,7 +11,7 @@
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
@@ -18,9 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * * By default, SRM requires 'manage_options' (Administrators).
  * We change it to 'edit_pages' so that Editors can also manage redirects.
  */
-add_filter( 'uamswp_srm_restrict_to_capability', 'uamswp_srm_allow_editor_access' );
+add_filter('uamswp_srm_restrict_to_capability', 'uamswp_srm_allow_editor_access');
 
-function uamswp_srm_allow_editor_access( $capability ) {
+function uamswp_srm_allow_editor_access($capability): string
+{
     // Return a capability that Editors possess
-    return 'edit_pages'; 
+    return 'edit_pages';
 }
