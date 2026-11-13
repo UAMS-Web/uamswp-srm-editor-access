@@ -3,7 +3,8 @@
  * Plugin Name: UAMSWP Safe Redirect Manager - Editor Access
  * Description: Allows users with the Editor role to access and manage redirects in the UAMSWP Safe Redirect Manager plugin.
  * Version: 1.0.0
- * Author: Todd McKee, MEd
+ * Author: UAMS Web Services
+ * Author URI: https://communications.uams.edu/web/
  */
 
 // Exit if accessed directly
