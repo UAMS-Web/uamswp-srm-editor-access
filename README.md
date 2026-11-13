@@ -21,3 +21,7 @@ Developers:
 
 - Josh Daugherty
 - Todd McKee
+
+## License
+
+Copyright 2026 UAMS Web Services. Released under the GNU General Public License, version 2 or later (GPL-2.0-or-later). The full text of version 2 is in [`LICENSE`](LICENSE).
