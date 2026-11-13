@@ -15,6 +15,12 @@ on:
     branches: [main]
   # Lets the workflow be run on demand against a branch.
   workflow_dispatch:
+  # The weekly full mutation pass: a scheduled run mutates everything `composer mutate` covers,
+  # which catches drift from a dependency or tooling change that no pull request touches. A
+  # schedule runs on the default branch, and GitHub disables it after 60 days without
+  # repository activity. Mondays at 07:17 UTC.
+  schedule:
+    - cron: '17 7 * * 1'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
