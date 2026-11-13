@@ -26,7 +26,13 @@ if (! defined('ABSPATH')) {
  */
 add_filter('uamswp_srm_restrict_to_capability', 'uamswp_srm_allow_editor_access');
 
-function uamswp_srm_allow_editor_access($capability): string
+/**
+ * Return the capability that lets Editors manage redirects.
+ *
+ * WordPress passes the capability being filtered, and the answer does not depend on it, so the
+ * callback declares no parameter: PHP drops the extra argument at runtime.
+ */
+function uamswp_srm_allow_editor_access(): string
 {
     // Return a capability that Editors possess
     return 'edit_pages';
