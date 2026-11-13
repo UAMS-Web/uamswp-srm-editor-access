@@ -29,7 +29,8 @@ jobs:
     uses: UAMS-Web/uams-ci-workflows/.github/workflows/ci.yml@v0.10.1
     with:
       linux-only: true
-      mutate: false
+      mutate-paths: uamswp-srm-editor-access.php
+      mutate-ignore-paths: uamswp-srm-editor-access.php
       floor-lint: true
       floor-lint-php: '8.2'
       # The plugin is one file, so the floor lint parses it directly.
