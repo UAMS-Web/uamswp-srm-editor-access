@@ -12,3 +12,12 @@ vendor/bin/pest
 ```
 
 `composer test` runs the same suite. Tests live in `tests/Unit/`.
+
+## Credits
+
+Developed and maintained by UAMS Web Services.
+
+Developers:
+
+- Josh Daugherty
+- Todd McKee
