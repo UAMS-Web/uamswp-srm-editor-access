@@ -3,6 +3,9 @@
     "description": "Allows users with the Editor role to access and manage redirects in the UAMSWP Safe Redirect Manager plugin.",
     "type": "wordpress-plugin",
     "license": "proprietary",
+    "require": {
+        "php": ">=8.2"
+    },
     "require-dev": {
         "brain/monkey": "^2.7",
         "laravel/pint": "^1.32",
