@@ -57,8 +57,9 @@ it('grants the Editor capability', function (): void {
 it('grants the Editor capability whatever capability WordPress passes it', function (array $arguments): void {
     require_once PLUGIN_FILE;
 
-    // WordPress calls the callback with the capability being filtered.
-    expect(call_user_func_array('uamswp_srm_allow_editor_access', $arguments))->toBe('edit_pages');
+    // WordPress calls the callback with the capability being filtered. Reflection passes the
+    // extra argument as WordPress does, which a direct call would not, and Rector would drop.
+    expect((new ReflectionFunction('uamswp_srm_allow_editor_access'))->invokeArgs($arguments))->toBe('edit_pages');
 })->with([[['manage_options']], [['edit_pages']], [['read']], [['']]]);
 
 it('registers the filter and runs on to the end when WordPress defines ABSPATH', function (): void {
