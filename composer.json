@@ -27,6 +27,7 @@
     "scripts": {
         "test": "@test:unit",
         "test:unit": "pest",
+        "mutate": "pest --mutate --everything --path=uamswp-srm-editor-access.php",
         "pint": "pint",
         "test:pint": "pint --test",
         "refactor": "rector",
@@ -36,6 +37,7 @@
     "scripts-descriptions": {
         "test": "Run the test suite.",
         "test:unit": "Run the Pest suite that needs no WordPress and no database.",
+        "mutate": "Run Pest mutation testing over the plugin file.",
         "pint": "Format the first-party PHP with Pint.",
         "test:pint": "Check the formatting without changing files.",
         "refactor": "Apply the Rector gating profile.",
