@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Plugin Name: UAMSWP Safe Redirect Manager - Editor Access
  * Plugin URI: https://github.com/UAMS-Web/uamswp-srm-editor-access
  * Description: Allows users with the Editor role to access and manage redirects in the UAMSWP Safe Redirect Manager plugin.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Requires PHP: 8.2
  * Author: UAMS Web Services
  * Author URI: https://communications.uams.edu/web/
